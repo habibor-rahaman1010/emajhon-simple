@@ -1,0 +1,22 @@
+.shop-container{
+    width: 80%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+}
+.product-container{
+    border-right: 1px solid lightgray;
+    margin-right: 15px;
+    margin-left: 50px;
+}
+.search-container{
+    background-color: rgb(31, 31, 31);
+    padding-bottom: 20px;
+}
+.search-container input{
+    display: block;
+    width: 50%;
+    margin: auto;
+   line-height: 30px;
+   font-size: 22px;
+}

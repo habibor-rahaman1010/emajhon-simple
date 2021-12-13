@@ -1,0 +1,39 @@
+.product{
+    display: flex;
+    padding: 30px;
+    padding-right: 50px;
+    border-bottom: 1px solid lightgray;
+    word-spacing: 1.5px;
+    margin-bottom: 20;
+}
+.product-right{
+    padding-left: 30px;
+    line-height: 25px;
+}
+.button{
+    width: 150px;
+    line-height: 27px;
+    background-color: rgb(230, 175, 26);
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: 0.5s;
+    color: rgb(87, 87, 87);
+    font-weight: 500;
+    font-size: 14.5px;
+}
+.button:hover{
+    background-color: gold;
+}
+.product-right h3{
+    color: rgb(0, 116, 151);
+}
+p{
+    color: rgb(100, 100, 100);
+}
+.rating{
+    margin-bottom: 14px;
+}
+.icon-color{
+    color: rgb(250, 204, 1);
+}
