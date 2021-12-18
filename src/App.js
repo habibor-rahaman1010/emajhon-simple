@@ -7,6 +7,7 @@ import NotFound from './Components/NotFound/NotFound';
 import About from './Components/About/About';
 import OrderReview from './Components/OrderReview/OrderReview';
 import ManageInventory from './Components/Manage Inventory/ManageInventory';
+import PlaceOrder from './Components/PlaceOrder/PlaceOrder';
 
 function App() {
   return (
@@ -36,6 +37,10 @@ function App() {
 
           <Route exact path='/about'>
             <About></About>
+          </Route>
+
+          <Route exact path='/place_order'>
+            <PlaceOrder></PlaceOrder>
           </Route>
 
           <Route exact path='*'>
