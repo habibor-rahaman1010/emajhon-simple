@@ -1,12 +1,48 @@
+import { Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom/cjs/react-router-dom.min';
 import './App.css';
 import Header from './Components/Header/Header';
 import Shop from './Components/Shop/Shop';
+import NotFound from './Components/NotFound/NotFound';
+import About from './Components/About/About';
+import OrderReview from './Components/OrderReview/OrderReview';
+import ManageInventory from './Components/Manage Inventory/ManageInventory';
 
 function App() {
   return (
     <div className="App">
-      <Header></Header>
-      <Shop></Shop>
+      <Router>
+        <Header></Header>
+        <Switch>
+          <Route exact path='/'>
+            <Shop></Shop>
+          </Route>
+
+          <Route exact path='/'>
+            <Shop></Shop>
+          </Route>
+
+          <Route exact path='/shop'>
+            <Shop></Shop>
+          </Route>
+
+          <Route exact path='/inventory'>
+            <ManageInventory></ManageInventory>
+          </Route>
+
+          <Route exact path='/review'>
+            <OrderReview></OrderReview>
+          </Route>
+
+          <Route exact path='/about'>
+            <About></About>
+          </Route>
+
+          <Route exact path='*'>
+            <NotFound></NotFound>
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
