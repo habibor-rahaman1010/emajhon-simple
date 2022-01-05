@@ -1,7 +1,34 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import useAuthProvider from '../../Hooks/UseAuth';
 
 const Registration = () => {
+    const { user, setUser, setError, googleSignIn, githubSignIn } = useAuthProvider();
+
+    const handleClickGoogle = () => {
+        googleSignIn()
+            .then((res) => {
+                const user = res.user;
+                setUser(user);
+            }).catch((error) => {
+                const errorMessage = error.message;
+                setError(errorMessage);
+            });
+    };
+
+    //github sign in
+    const handleClickGithub = () => {
+        githubSignIn()
+            .then((res) => {
+                const user = res.user;
+                setUser(user);
+            }).catch((error) => {
+                const errorMessage = error.message;
+                setError(errorMessage);
+            })
+    }
+    console.log(user)
+
     return (
         <div className='mt-5'>
             <form className='w-25 m-auto'>
@@ -55,8 +82,8 @@ const Registration = () => {
 
 
             <div className='mt-4 w-25 m-auto'>
-                <button className='btn btn-primary'>Google Sign In</button> &nbsp; &nbsp;
-                <button className='btn btn-secondary'>Github Sign in </button> &nbsp; &nbsp;
+                <button onClick={handleClickGoogle} className='btn btn-primary'>Google Sign In</button> &nbsp; &nbsp;
+                <button onClick={handleClickGithub} className='btn btn-secondary'>Github Sign in </button> &nbsp; &nbsp;
                 <button className='btn btn-success' data-bs-toggle="modal" data-bs-target="#exampleModal">Facebook Sign in </button> <br /> <br />
             </div>
         </div>

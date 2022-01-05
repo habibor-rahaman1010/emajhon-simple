@@ -1,7 +1,7 @@
 //this is my firebase funtionality here...
 import { useState } from 'react';
 import initializeAuthentication from '../Firebase/firebase.initialize';
-import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, GithubAuthProvider, signOut } from "firebase/auth";
 import { useEffect } from 'react';
 
 
@@ -11,13 +11,21 @@ const UseFirebase = () => {
 
     initializeAuthentication();
 
+    // google sign in funtionality
     const googleSignIn = () => {
         const googleProvider = new GoogleAuthProvider();
         const auth = getAuth();
         return signInWithPopup(auth, googleProvider);
     }
 
-    //login user state persistance 
+    // google sign in funtionality
+    const githubSignIn = () => {
+        const githubProvider = new GithubAuthProvider();
+        const auth = getAuth();
+        return signInWithPopup(auth, githubProvider);
+    }
+
+    //login user state persistance , observe whether user auth state changed or not....
     useEffect(() => {
         const auth = getAuth();
         onAuthStateChanged(auth, (user) => {
@@ -47,6 +55,7 @@ const UseFirebase = () => {
         setError,
         logout,
         googleSignIn,
+        githubSignIn
     }
 }
 

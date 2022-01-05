@@ -1,11 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import UseFirebase from '../../Hooks/UseFirebase';
+import useAuthProvider from '../../Hooks/UseAuth';
 import logo from '../../images/logo.png'
 import './Header.css'
 
 const Header = () => {
-    const { user, logout } = UseFirebase();
+    const { user, logout } = useAuthProvider();
     const UserLogOut = () => {
         logout();
     }

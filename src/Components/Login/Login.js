@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import UseFirebase from '../../Hooks/UseFirebase';
+import useAuthProvider from '../../Hooks/UseAuth';
 
 const Login = () => {
-    const { user, setUser, setError, googleSignIn } = UseFirebase();
+    const { user, setUser, setError, googleSignIn, githubSignIn } = useAuthProvider();
 
     const handleClickGoogle = () => {
         googleSignIn()
@@ -15,6 +15,18 @@ const Login = () => {
                 setError(errorMessage);
             });
     };
+
+    //github sign in
+    const handleClickGithub = () => {
+        githubSignIn()
+            .then((res) => {
+                const user = res.user;
+                setUser(user);
+            }).catch((error) => {
+                const errorMessage = error.message;
+                setError(errorMessage);
+            })
+    }
     console.log(user)
 
 
@@ -61,7 +73,7 @@ const Login = () => {
 
             <div className='mt-4 w-25 m-auto'>
                 <button onClick={handleClickGoogle} className='btn btn-primary'>Google Sign In</button> &nbsp; &nbsp;
-                <button className='btn btn-secondary'>Github Sign in </button> &nbsp; &nbsp;
+                <button onClick={handleClickGithub} className='btn btn-secondary'>Github Sign in </button> &nbsp; &nbsp;
                 <button className='btn btn-success' data-bs-toggle="modal" data-bs-target="#exampleModal">Facebook Sign in </button> <br /> <br />
                 <Link to='/registration'> Are you new user?</Link>
             </div>
