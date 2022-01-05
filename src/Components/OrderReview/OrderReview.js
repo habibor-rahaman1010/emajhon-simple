@@ -27,7 +27,7 @@ const OrderReview = () => {
             <div>
                 <div className='shop-container'>
                     <div className='product-container'>
-                        <h3>This is your shopping products details here... </h3>
+                        <h3 className='mt-4'>This is your shopping products details here... </h3>
                         {
                             cart.map((details) => <Review details={details} key={details.key} handleRemove={handleRemove}></Review>)
                         }

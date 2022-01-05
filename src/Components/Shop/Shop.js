@@ -72,9 +72,9 @@ const Shop = () => {
             </div>,
 
             <div className='shop-container'>
-                <div className='product-container'>
-                    <h3>This is shopping website... </h3>
-                    <h3>Products: {displayProducts.length}</h3>
+                <div className='product-container mt-3'>
+                    <h4 className='text-success'>This is shopping website... </h4>
+                    <h4 className='text-success'>Products: {displayProducts.length}</h4>
                     {
                         displayProducts.map((product) => <Product data={product} handleAddToCart={handleAddToCart} key={product.key}></Product>)
                     }

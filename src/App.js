@@ -8,6 +8,8 @@ import About from './Components/About/About';
 import OrderReview from './Components/OrderReview/OrderReview';
 import ManageInventory from './Components/Manage Inventory/ManageInventory';
 import PlaceOrder from './Components/PlaceOrder/PlaceOrder';
+import Login from './Components/Login/Login';
+import Registration from './Components/Registration/Registration';
 
 function App() {
   return (
@@ -41,6 +43,14 @@ function App() {
 
           <Route exact path='/place_order'>
             <PlaceOrder></PlaceOrder>
+          </Route>
+
+          <Route exact path='/login'>
+            <Login></Login>
+          </Route>
+
+          <Route exact path='/registration'>
+            <Registration></Registration>
           </Route>
 
           <Route exact path='*'>

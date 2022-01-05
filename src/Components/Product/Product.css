@@ -25,8 +25,9 @@
 .button:hover{
     background-color: gold;
 }
-.product-right h3{
+.product-right h4{
     color: rgb(0, 116, 151);
+    font-size: 1.3rem;
 }
 p{
     color: rgb(100, 100, 100);

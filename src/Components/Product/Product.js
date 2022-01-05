@@ -15,7 +15,7 @@ const Product = (props) => {
                 <img src={img} alt="product" />
             </div>
             <div className='product-right'>
-                <h3>{name ? name : 'Empty Data'}</h3>
+                <h4>{name ? name : 'Empty Data'}</h4>
                 <p>By: {seller ? seller : 'Empty Data'}</p>
                 <p>Price: ${price ? price : 'Empty Data'}</p>
                 <p>Only {stock} left in stock - order soon</p>
