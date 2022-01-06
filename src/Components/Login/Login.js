@@ -1,15 +1,19 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import useAuthProvider from '../../Hooks/UseAuth';
 
 const Login = () => {
-    const { user, setUser, setError, googleSignIn, githubSignIn } = useAuthProvider();
+    const { setError, googleSignIn, githubSignIn } = useAuthProvider();
+    const location = useLocation();
+    const history = useHistory();
+    const redirect_uri = location.state?.from || '/shop';
 
     const handleClickGoogle = () => {
         googleSignIn()
-            .then((res) => {
-                const user = res.user;
-                setUser(user);
+            .then(() => {
+                history.push(redirect_uri);
             }).catch((error) => {
                 const errorMessage = error.message;
                 setError(errorMessage);
@@ -19,16 +23,13 @@ const Login = () => {
     //github sign in
     const handleClickGithub = () => {
         githubSignIn()
-            .then((res) => {
-                const user = res.user;
-                setUser(user);
+            .then(() => {
+                history.push(redirect_uri)
             }).catch((error) => {
                 const errorMessage = error.message;
                 setError(errorMessage);
             })
     }
-    console.log(user)
-
 
     return (
         <div className='mt-5'>

@@ -11,6 +11,8 @@ import PlaceOrder from './Components/PlaceOrder/PlaceOrder';
 import Login from './Components/Login/Login';
 import Registration from './Components/Registration/Registration';
 import AuthProvider from './Context/AuthProvider';
+import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
+import Shipping from './Components/Shipping/Shipping';
 
 
 function App() {
@@ -37,6 +39,10 @@ function App() {
               <ManageInventory></ManageInventory>
             </Route>
 
+            <PrivateRoute exact path='/shipping'>
+              <Shipping></Shipping>
+            </PrivateRoute>
+
             <Route exact path='/review'>
               <OrderReview></OrderReview>
             </Route>
@@ -45,9 +51,9 @@ function App() {
               <About></About>
             </Route>
 
-            <Route exact path='/place_order'>
+            <PrivateRoute exact path='/place_order'>
               <PlaceOrder></PlaceOrder>
-            </Route>
+            </PrivateRoute>
 
             <Route exact path='/login'>
               <Login></Login>

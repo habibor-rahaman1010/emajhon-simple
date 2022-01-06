@@ -53,7 +53,6 @@ const Shop = () => {
             newCart = [...cart, product];
         }
 
-        console.log(newCart)
         setCart(newCart);
         addToDb(product.key)
     }
