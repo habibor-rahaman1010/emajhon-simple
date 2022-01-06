@@ -11,7 +11,7 @@ const Shop = () => {
     const [displayProducts, setDisplayProducts] = useState([]);
 
     useEffect(() => {
-        const URl = `./fakeData/products.JSON`;
+        const URl = `./fakeData/products.json`;
         fetch(URl)
             .then((res) => res.json())
             .then((data) => {

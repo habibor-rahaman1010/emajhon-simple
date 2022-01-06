@@ -4,7 +4,7 @@ const useProducts = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        const API = `./fakeData/products.JSON`;
+        const API = `./fakeData/products.json`;
         fetch(API)
             .then((res) => res.json())
             .then((data) => setProducts(data));
