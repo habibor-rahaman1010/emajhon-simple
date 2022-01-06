@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import useAuthProvider from '../../Hooks/UseAuth';
 
 const Login = () => {
-    const { setError, googleSignIn, githubSignIn } = useAuthProvider();
+    const { setUser, setError, googleSignIn, githubSignIn, createCoustomSignIn, email, password, setEmail, setPassword } = useAuthProvider();
     const location = useLocation();
     const history = useHistory();
     const redirect_uri = location.state?.from || '/shop';
@@ -31,21 +31,52 @@ const Login = () => {
             })
     }
 
+
+
+    //coustom signIn authentication here....
+    const handleLogin = (e) => {
+        e.preventDefault()
+        coustomLogin();
+    }
+
+    // get email in email field...
+    const handleGetEmail = (e) => {
+        const email = e.target.value;
+        setEmail(email)
+    }
+
+    // get password in email field...
+    const handleGetPassword = (e) => {
+        const password = e.target.value;
+        setPassword(password)
+    }
+
+    const coustomLogin = () => {
+        createCoustomSignIn(email, password)
+            .then((res) => {
+                const user = res.user;
+                setUser(user);
+            }).catch((error) => {
+                const errorMessage = error.message;
+                setError(errorMessage);
+            })
+    }
+
     return (
         <div className='mt-5'>
-            <form className='w-25 m-auto'>
+            <form onSubmit={handleLogin} className='w-25 m-auto'>
                 <h2 className='mb-5'>Hey, Please Login! </h2>
 
                 <div className="mb-3 row ">
                     <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Email</label>
                     <div className="col-sm-10">
-                        <input type="text" className="form-control" id="staticEmail" placeholder="Your Email" />
+                        <input onBlur={handleGetEmail} type="text" className="form-control" id="staticEmail" placeholder="Your Email" />
                     </div>
                 </div>
                 <div className="mb-3 row">
                     <label htmlFor="inputPassword" className="col-sm-2 col-form-label">Password</label>
                     <div className="col-sm-10">
-                        <input type="password" className="form-control" id="inputPassword" placeholder='Your Password' />
+                        <input onBlur={handleGetPassword} type="password" className="form-control" id="inputPassword" placeholder='Your Password' />
                     </div>
                 </div>
 

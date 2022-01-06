@@ -64,7 +64,7 @@ const Header = () => {
 
                 <nav>
                     {
-                        user.photoURL ? <div className='profile'><span><img src={user.photoURL} alt="Avater" /></span> &nbsp; &nbsp;
+                        user.photoURL || user.email ? <div className='profile'><span><img src={user.photoURL} alt="Avater" /></span> &nbsp; &nbsp;
                             <button onClick={UserLogOut} className='btn btn-danger me-5'>Logout</button> </div> :
                             [
                                 <NavLink

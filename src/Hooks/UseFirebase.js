@@ -1,13 +1,20 @@
 //this is my firebase funtionality here...
 import { useState } from 'react';
 import initializeAuthentication from '../Firebase/firebase.initialize';
-import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, GithubAuthProvider, signOut } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, GithubAuthProvider, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { useEffect } from 'react';
 
 
 const UseFirebase = () => {
     const [user, setUser] = useState({});
     const [error, setError] = useState('');
+
+    // coustom login sate....
+    const [email, setEmail] = useState('')
+    const [name, setName] = useState('');
+    const [password, setPassword] = useState('');
+    const [repassword, setRepassword] = useState('');
+
 
     initializeAuthentication();
 
@@ -23,6 +30,20 @@ const UseFirebase = () => {
         const githubProvider = new GithubAuthProvider();
         const auth = getAuth();
         return signInWithPopup(auth, githubProvider);
+    }
+
+
+    //coustom crete authrntication user
+    // name, email, password, repassword
+    const createCoustomUser = () => {
+        const auth = getAuth();
+        return createUserWithEmailAndPassword(auth, email, password);
+    }
+
+    //coustom sign in authentication....
+    const createCoustomSignIn = () => {
+        const auth = getAuth();
+        return signInWithEmailAndPassword(auth, email, password)
     }
 
     //login user state persistance , observe whether user auth state changed or not....
@@ -48,6 +69,8 @@ const UseFirebase = () => {
         });
     };
 
+
+
     return {
         user,
         setUser,
@@ -55,7 +78,17 @@ const UseFirebase = () => {
         setError,
         logout,
         googleSignIn,
-        githubSignIn
+        githubSignIn,
+        createCoustomUser,
+        createCoustomSignIn,
+        name,
+        setName,
+        email,
+        setEmail,
+        password,
+        setPassword,
+        repassword,
+        setRepassword
     }
 }
 

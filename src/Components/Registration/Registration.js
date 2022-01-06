@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import useAuthProvider from '../../Hooks/UseAuth';
 
 const Registration = () => {
-    const { setError, googleSignIn, githubSignIn } = useAuthProvider();
+    const { setUser, setError, googleSignIn, githubSignIn, createCoustomUser, setName, setEmail, setPassword, setRepassword, email, password, } = useAuthProvider();
     const location = useLocation();
     const history = useHistory();
     const redirect_uri = location.state?.from || '/shop';
@@ -32,32 +32,74 @@ const Registration = () => {
             })
     }
 
+
+    // this is my coustiom authentication here....
+    const handleRegistration = (e) => {
+        e.preventDefault();
+        handleCreateCoustomUser();
+    }
+    // get user nmae
+    const handleGetName = (e) => {
+        const name = e.target.value;
+        setName(name);
+    }
+
+    // get user Email
+    const handleGetEmail = (e) => {
+        const email = e.target.value;
+        setEmail(email);
+    }
+
+    // get user Password
+    const handleGetPassword = (e) => {
+        const password = e.target.value;
+        setPassword(password);
+    }
+
+    // get user Re-Password
+    const handleGetNameRePassword = (e) => {
+        const repassword = e.target.value;
+        setRepassword(repassword);
+    }
+
+    const handleCreateCoustomUser = () => {
+        createCoustomUser(email, password)
+            .then((res) => {
+                setUser(res);
+            }).catch((error) => {
+                const errorMessage = error.message;
+                setError(errorMessage);
+            })
+
+    }
+
+
     return (
         <div className='mt-5'>
-            <form className='w-25 m-auto'>
+            <form onSubmit={handleRegistration} className='w-25 m-auto'>
                 <h2 className='mb-5'>This is my reistration </h2>
                 <div className="mb-3 row ">
                     <label htmlFor="staticName" className="col-sm-2 col-form-label">Name</label>
                     <div className="col-sm-10">
-                        <input type="text" className="form-control" id="staticName" placeholder='Your Name' />
+                        <input onBlur={handleGetName} type="text" className="form-control" id="staticName" placeholder='Your Name' required />
                     </div>
                 </div>
                 <div className="mb-3 row ">
                     <label htmlFor="staticEmail" className="col-sm-2 col-form-label">Email</label>
                     <div className="col-sm-10">
-                        <input type="email" className="form-control" id="staticEmail" placeholder="Your Email" />
+                        <input onBlur={handleGetEmail} type="email" className="form-control" id="staticEmail" placeholder="Your Email" required />
                     </div>
                 </div>
                 <div className="mb-3 row">
                     <label htmlFor="inputPassword" className="col-sm-2 col-form-label">Password</label>
                     <div className="col-sm-10">
-                        <input type="password" className="form-control" id="inputPassword" placeholder='Your Password' />
+                        <input onBlur={handleGetPassword} type="password" className="form-control" id="inputPassword" placeholder='Your Password' required />
                     </div>
                 </div>
                 <div className="mb-3 row">
                     <label htmlFor="inputPassword" className="col-sm-2 col-form-label">Password</label>
                     <div className="col-sm-10">
-                        <input type="password" className="form-control" id="inputPassword" placeholder='Re Enter Your Password' />
+                        <input onBlur={handleGetNameRePassword} type="password" className="form-control" id="inputRePassword" placeholder='Re Enter Your Password' required />
                     </div>
                 </div>
 
