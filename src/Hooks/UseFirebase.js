@@ -1,7 +1,7 @@
 //this is my firebase funtionality here...
 import { useState } from 'react';
 import initializeAuthentication from '../Firebase/firebase.initialize';
-import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, GithubAuthProvider, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, GithubAuthProvider, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useEffect } from 'react';
 
 
@@ -40,6 +40,15 @@ const UseFirebase = () => {
         return signInWithEmailAndPassword(auth, email, password)
     }
 
+    // set display name and profile
+    // const updateUserInformation = (name) => {
+    //     const auth = getAuth();
+    //     return updateProfile(auth.currentUser, {
+    //         displayName: name,
+    //     })
+    // }
+
+
     //login user state persistance , observe whether user auth state changed or not....
     useEffect(() => {
         const auth = getAuth();
@@ -65,6 +74,7 @@ const UseFirebase = () => {
         });
     };
 
+    console.log(user)
 
     return {
         user,
@@ -75,7 +85,7 @@ const UseFirebase = () => {
         googleSignIn,
         githubSignIn,
         createCoustomUser,
-        createCoustomSignIn,
+        createCoustomSignIn
     }
 }
 

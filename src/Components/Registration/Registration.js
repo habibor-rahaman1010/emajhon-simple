@@ -16,7 +16,6 @@ const Registration = () => {
     const location = useLocation();
     const history = useHistory();
     const redirect_uri = location.state?.from || '/shop';
-    const redirect_reg_uri = location.state?.form || '/login'
 
     // this is googlr handle click..
     const handleClickGoogle = () => {
@@ -70,16 +69,18 @@ const Registration = () => {
         setRepassword(repassword);
     }
 
+    // this function cretae an user....
     const handleCreateCoustomUser = (email, password) => {
         createCoustomUser(email, password)
             .then(() => {
-                history.push(redirect_reg_uri)
+                history.push(redirect_uri)
             }).catch((error) => {
                 const errorMessage = error.message;
                 setError(errorMessage);
             })
 
     }
+
 
 
     return (

@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import useAuthProvider from '../../Hooks/UseAuth';
 import logo from '../../images/logo.png'
 import './Header.css'
+import avatar from '../../images/avatar.png'
 
 const Header = () => {
     const { user, logout } = useAuthProvider();
@@ -64,7 +65,7 @@ const Header = () => {
 
                 <nav>
                     {
-                        user.photoURL || user.email ? <div className='profile'><span><img src={user.photoURL} alt="Avater" /></span> &nbsp; &nbsp;
+                        user.photoURL || user.email ? <div className='profile'><span><img src={user.photoURL ? user.photoURL : avatar} alt="Avater" /></span> &nbsp; &nbsp;
                             <button onClick={UserLogOut} className='btn btn-danger me-5'>Logout</button> </div> :
                             [
                                 <NavLink
