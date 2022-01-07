@@ -49,21 +49,22 @@ const UseFirebase = () => {
     //login user state persistance , observe whether user auth state changed or not....
     useEffect(() => {
         const auth = getAuth();
-        onAuthStateChanged(auth, (user) => {
+        const unsubscriber = onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser(user);
             }
             else {
-                return;
+                return () => setUser({});
             }
-        })
+        });
+        return () => unsubscriber
     }, [user]);
 
     // sign out funtionality here
     const logout = () => {
         const auth = getAuth();
         signOut(auth).then(() => {
-            setUser({})
+            setUser({});
         }).catch((error) => {
             setError(error.message)
         });

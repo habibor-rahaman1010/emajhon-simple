@@ -5,10 +5,11 @@ import { Link } from 'react-router-dom';
 import useAuthProvider from '../../Hooks/UseAuth';
 
 const Registration = () => {
-    const { setUser, setError, googleSignIn, githubSignIn, createCoustomUser, setName, setEmail, setPassword, setRepassword, email, password, } = useAuthProvider();
+    const { setError, googleSignIn, githubSignIn, createCoustomUser, setName, setEmail, setPassword, setRepassword, email, password } = useAuthProvider();
     const location = useLocation();
     const history = useHistory();
     const redirect_uri = location.state?.from || '/shop';
+    const redirect_reg_uri = location.state?.form || '/login'
 
     // this is googlr handle click..
     const handleClickGoogle = () => {
@@ -64,8 +65,8 @@ const Registration = () => {
 
     const handleCreateCoustomUser = () => {
         createCoustomUser(email, password)
-            .then((res) => {
-                setUser(res);
+            .then(() => {
+                history.push(redirect_reg_uri)
             }).catch((error) => {
                 const errorMessage = error.message;
                 setError(errorMessage);
