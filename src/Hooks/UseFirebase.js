@@ -9,12 +9,6 @@ const UseFirebase = () => {
     const [user, setUser] = useState({});
     const [error, setError] = useState('');
 
-    // coustom login sate....
-    const [email, setEmail] = useState('')
-    const [name, setName] = useState('');
-    const [password, setPassword] = useState('');
-    const [repassword, setRepassword] = useState('');
-
 
     initializeAuthentication();
 
@@ -35,13 +29,13 @@ const UseFirebase = () => {
 
     //coustom crete authrntication user
     // name, email, password, repassword
-    const createCoustomUser = () => {
+    const createCoustomUser = (email, password) => {
         const auth = getAuth();
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
     //coustom sign in authentication....
-    const createCoustomSignIn = () => {
+    const createCoustomSignIn = (email, password) => {
         const auth = getAuth();
         return signInWithEmailAndPassword(auth, email, password)
     }
@@ -57,8 +51,9 @@ const UseFirebase = () => {
                 return () => setUser({});
             }
         });
-        return () => unsubscriber
+        return () => unsubscriber()
     }, [user]);
+
 
     // sign out funtionality here
     const logout = () => {
@@ -71,7 +66,6 @@ const UseFirebase = () => {
     };
 
 
-
     return {
         user,
         setUser,
@@ -82,14 +76,6 @@ const UseFirebase = () => {
         githubSignIn,
         createCoustomUser,
         createCoustomSignIn,
-        name,
-        setName,
-        email,
-        setEmail,
-        password,
-        setPassword,
-        repassword,
-        setRepassword
     }
 }
 

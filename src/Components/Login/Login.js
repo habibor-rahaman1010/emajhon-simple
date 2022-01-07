@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import useAuthProvider from '../../Hooks/UseAuth';
 
 const Login = () => {
-    const { setUser, setError, googleSignIn, githubSignIn, createCoustomSignIn, email, password, setEmail, setPassword } = useAuthProvider();
+    // coustom user creation sate....
+    const [email, setEmail] = useState('')
+    const [name, setName] = useState('');
+    const [password, setPassword] = useState('');
+
+    const { setError, googleSignIn, githubSignIn, createCoustomSignIn } = useAuthProvider();
     const location = useLocation();
     const history = useHistory();
     const redirect_uri = location.state?.from || '/shop';
@@ -36,7 +41,7 @@ const Login = () => {
     //coustom signIn authentication here....
     const handleLogin = (e) => {
         e.preventDefault()
-        coustomLogin();
+        coustomLogin(email, password);
     }
 
     // get email in email field...
@@ -51,11 +56,10 @@ const Login = () => {
         setPassword(password)
     }
 
-    const coustomLogin = () => {
+    const coustomLogin = (email, password) => {
         createCoustomSignIn(email, password)
-            .then((res) => {
-                const user = res.user;
-                setUser(user);
+            .then(() => {
+                history.push(redirect_uri)
             }).catch((error) => {
                 const errorMessage = error.message;
                 setError(errorMessage);

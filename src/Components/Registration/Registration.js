@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import useAuthProvider from '../../Hooks/UseAuth';
 
 const Registration = () => {
-    const { setError, googleSignIn, githubSignIn, createCoustomUser, setName, setEmail, setPassword, setRepassword, email, password } = useAuthProvider();
+
+    // coustom user creation sate....
+    const [email, setEmail] = useState('')
+    const [name, setName] = useState('');
+    const [password, setPassword] = useState('');
+    const [repassword, setRepassword] = useState('');
+
+    const { setError, googleSignIn, githubSignIn, createCoustomUser } = useAuthProvider();
     const location = useLocation();
     const history = useHistory();
     const redirect_uri = location.state?.from || '/shop';
@@ -37,7 +44,7 @@ const Registration = () => {
     // this is my coustiom authentication here....
     const handleRegistration = (e) => {
         e.preventDefault();
-        handleCreateCoustomUser();
+        handleCreateCoustomUser(email, password);
     }
     // get user nmae
     const handleGetName = (e) => {
@@ -63,7 +70,7 @@ const Registration = () => {
         setRepassword(repassword);
     }
 
-    const handleCreateCoustomUser = () => {
+    const handleCreateCoustomUser = (email, password) => {
         createCoustomUser(email, password)
             .then(() => {
                 history.push(redirect_reg_uri)
