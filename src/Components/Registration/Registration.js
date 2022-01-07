@@ -3,16 +3,17 @@ import { useHistory } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import useAuthProvider from '../../Hooks/UseAuth';
+import { getAuth, updateProfile } from "firebase/auth";
 
 const Registration = () => {
-
+    const { setError, googleSignIn, githubSignIn, createCoustomUser } = useAuthProvider();
     // coustom user creation sate....
     const [email, setEmail] = useState('')
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const [repassword, setRepassword] = useState('');
 
-    const { setError, googleSignIn, githubSignIn, createCoustomUser } = useAuthProvider();
+
     const location = useLocation();
     const history = useHistory();
     const redirect_uri = location.state?.from || '/shop';
@@ -81,6 +82,15 @@ const Registration = () => {
 
     }
 
+
+    const auth = getAuth();
+    updateProfile(auth.currentUser, {
+        displayName: name
+    }).then(() => {
+        return
+    }).catch((error) => {
+        return
+    });
 
 
     return (
